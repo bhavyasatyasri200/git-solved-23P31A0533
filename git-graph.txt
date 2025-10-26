@@ -1,0 +1,36 @@
+* f866d77 (HEAD -> main, origin/main) docs: Add changelog
+* f7776da docs:Add git Mastery Challenge journey report
+*   b4bad08 Merge pull request #2 from bhavyasatyasri200/feature/another-feature
+|\  
+| * ba004bd (origin/feature/another-feature) feat:Add test feature
+* |   031b6a4 Merge pull request #1 from bhavyasatyasri200/feature/new-feature
+|\ \  
+| * | 90e0a57 (origin/feature/new-feature, feature/new-feature) feat:Add new feature
+* | | 26faf0f Update README.md
+| | | * c713585 (feature/another-feature) Bad Commit
+| | |/  
+| | * 9a3b61e (tag: v1.2.0, tag: v1.1.0, tag: v1.0.0) docs:update README
+| |/  
+|/|   
+* | ee849a6 feat:Add new feature
+* | 433b940 docs:Add FAQ section
+|/  
+* e115427 README.md
+*   6fc16b1 Merge branch 'main' of https://github.com/bhavyasatyasri200/git-solved-23P31A0533
+|\  
+| * 52bf5a7 Update README.md
+| * f3977aa Update README.md
+| * 5daeb2a Add student information to README
+* | 933a769 Add checkpoint folder
+|/  
+*   2532d7e merge:Resolve all conflicts between main adn conflic t-simulator
+|\  
+| * d3dd9b2 (instructor/conflict-simulator, conflict-simulator) updating conflict-simulator
+* |   7845474 merge: Resolve all conflicts between main and dev branches
+|\ \  
+| * | 02011a5 (instructor/dev, dev) updating dev
+| |/  
+* | 0312c6f (instructor/main, instructor/HEAD) updating main
+* | fadfd24 Revise README for DevOps Simulator project
+|/  
+* ae630eb Initial commit
