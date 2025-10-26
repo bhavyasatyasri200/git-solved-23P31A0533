@@ -1,37 +1,58 @@
-# Application Configuration (Merged Production + Development)
+# Unified Application Configuration
 application:
   name: DevOpsSimulator
-  version: 2.0.0-beta   # Using dev version for testing
-  environment: development  # Change to 'production' when deploying
+  version: 3.0.0-experimental   # use latest version
+  environment: development      # or 'testing' / 'production' as needed
+  experimental_mode: true
 
 server:
-  host: 0.0.0.0           # Use 0.0.0.0 for production accessibility
-  port: 8080              # Production port
-  ssl_enabled: true       # Enable SSL in production
-  hot_reload: true        # Useful for development testing
+  host: 0.0.0.0
+  port: 8080                     # main port for dev/prod
+  multi_port: [9000, 9001, 9002] # include experimental ports
+  ssl_enabled: true
+  hot_reload: true               # useful in development
 
 logging:
-  level: DEBUG            # Development-friendly logging
-  format: json            # Keep JSON format for production
-  output: /var/log/app.log # File output for production
-  show_stack_trace: true  # Helpful in development
+  level: TRACE                   # use detailed logging for testing
+  format: structured
+  output: /var/log/app.log
+  show_stack_trace: true
+  ai_analysis: enabled
 
 database:
-  host: localhost         # Use localhost for dev, change to prod-db.example.com for production
+  host: cluster.example.com      # choose experimental cluster
   port: 5432
-  name: devops_dev         # Development database name
-  # name: devops_prod      # Uncomment for production
+  name: devops_dev               # or devops_experimental
+  distributed: true
 
 features:
-  auto_scaling: true
-  load_balancer: enabled
+  auto_scaling: advanced
+  load_balancer: ai-optimized
   backup_enabled: true
   experimental_features: true
+  chaos_engineering: enabled
 
 development:
   mock_external_apis: true
   debug_mode: true
   cors_enabled: true
+
+ai_features:
+  predictive_scaling: true
+  anomaly_detection: true
+  auto_optimization: true
+  model_version: "v2.1.0"
+
+cloud_providers:
+  - aws
+  - azure
+  - gcp
+  - digitalocean
+
+security:
+  zero_trust: enabled
+  encryption: AES-256
+  audit_logging: comprehensive
 
 notifications:
   slack_webhook: "https://hooks.slack.com/services/XXX"

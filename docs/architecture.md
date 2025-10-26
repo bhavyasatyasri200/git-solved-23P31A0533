@@ -1,60 +1,59 @@
 # System Architecture
 
 ## Overview
-DevOps Simulator follows a microservices architecture designed for high availability and scalability.
+DevOps Simulator follows a **microservices architecture** designed for high availability and scalability.
 
-**Development Version**: This document describes the development architecture with experimental features.
+**Development Version**: Includes local development setup with hot reload.  
+**Experimental Version**: Adds AI/ML integration, multi-cloud orchestration, and chaos engineering features.
 
-## Components
+## Core Components
 
 ### 1. Application Server
-- **Technology**: Node.js + Express (with hot reload)
-- **Port**: 3000 (development)
-- **Scaling**: Manual (single instance for development)
-- **Debug**: Chrome DevTools debugger on port 9229
+- **Technology**: Node.js + Express (+ TensorFlow.js for experimental)
+- **Ports**: 
+  - Development: 3000  
+  - Experimental: 9000 (main), 9001 (metrics), 9002 (AI API)
+- **Scaling**: Manual in development, AI-powered predictive auto-scaling in experimental
+- **Debug/Intelligence**: Chrome DevTools debugger for dev, real-time ML inference for experimental
+- **Message Queue**: Apache Kafka (experimental)
 
 ### 2. Database Layer
-- **Database**: PostgreSQL 14 (local instance)
-- **Configuration**: Single instance (no replication in dev)
-- **Backup**: Manual backups only
-- **Seeding**: Auto-seed with test data on startup
+- **Development**: Local PostgreSQL 14, single instance, auto-seeded
+- **Experimental**: PostgreSQL 14 cluster (5 nodes), multi-master replication, Redis cluster with ML cache optimization
+- **Backup**: Manual for dev, continuous with geo-redundancy for experimental
+- **AI Features**: Query optimization, index suggestions (experimental)
 
-### 3. Monitoring System
-- **Tool**: Basic console logging + Prometheus (optional)
-- **Metrics**: CPU, Memory, Disk, Network, Build time
-- **Alerts**: Console warnings (no email in dev)
-- **Dashboard**: In-development web dashboard
+### 3. Monitoring & Observability
+- **Development**: Console logging, Prometheus optional
+- **Experimental**: Prometheus + Thanos, ELK stack, AI log analysis
+- **Alerts**: Console warnings in dev, advanced anomaly detection in experimental
 
-### 4. NEW: Container Orchestration
-- **Tool**: Docker Compose (local)
-- **Services**: App, Database, Redis cache
-- **Volume Mounts**: Code directory for hot reload
+### 4. Container Orchestration
+- **Development**: Docker Compose with hot reload
+- **Experimental**: Kubernetes with custom CRDs, global anycast load balancing, cross-cloud failover
 
-### 5. NEW: Authentication System (Beta)
-- **Method**: OAuth2 + JWT
-- **Providers**: Google, GitHub (for testing)
-- **Sessions**: Redis-based session storage
+### 5. Authentication
+- **Development**: OAuth2 + JWT, Redis sessions
+- **Experimental**: OAuth2, AI-powered security analysis, multi-cloud authentication integration
 
 ## Deployment Strategy
-- **Method**: Docker Compose hot reload
-- **Zero-downtime**: Not applicable (dev environment)
-- **Rollback**: Git checkout previous commit
+- **Development**: Docker Compose hot reload, rollback via Git checkout
+- **Experimental**: Automated cross-cloud deployment with zero-downtime failover
 
-## Development Workflow
+## Security
+- **Development**: SSL/TLS disabled, CORS enabled, debug endpoints exposed
+- **Experimental**: Zero-trust, AES-256 encryption, comprehensive audit logging
+
+## Workflow
 1. Make code changes
-2. Auto-reload triggers rebuild
+2. Auto-reload triggers rebuild (dev)
 3. Run unit tests
 4. Check console logs
 5. Commit when ready
 
-## Security
-- SSL/TLS disabled for local development
-- Database credentials in plain text (dev only)
-- CORS enabled for all origins
-- Debug endpoints exposed
-
 ## Experimental Features
-⚠️ **Warning**: The following features are experimental:
 - Multi-cloud deployment
 - AI-powered log analysis
 - Automatic rollback on anomaly detection
+- Predictive auto-scaling
+- Chaos engineering
