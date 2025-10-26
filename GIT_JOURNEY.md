@@ -4,7 +4,7 @@
 
 * Name: Bhavya Saty Sri
 * Student ID: 23P31A0533
-* Repository: [https://github.com/bhavyasatyasri200/git-solved-23P31A0533](https://github.com/bhavyasatyasri200/    git-solved-23P31A0533)
+* Repository: https://github.com/bhavyasatyasri200/git-solved-23P31A0533
 * Date Started: 26-10-2025
 * Date Completed: 26-10-2025
 
