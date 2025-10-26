@@ -89,3 +89,4 @@ npm install
 npm run dev
 
 # Access dashboard at http://localhost:3000
+##FAQ
