@@ -4,6 +4,7 @@
     "port": 5432,
     "database": "devops_production",
     "username": "prod_admin",
+    "password": "dev_password",
     "ssl_mode": "require",
     "pool_size": 20,
     "timeout": 30
@@ -18,5 +19,10 @@
     "enabled": true,
     "replicas": 2,
     "sync_mode": "synchronous"
+  },
+  "development": {
+    "seed_data": true,
+    "reset_on_restart": true,
+    "debug_queries": true
   }
 }
