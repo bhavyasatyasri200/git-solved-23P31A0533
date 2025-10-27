@@ -36,20 +36,8 @@ A comprehensive CI/CD configuration management tool for enterprise deployments.
 
 ## Quick Start
 
-### Standard / Development Mode
-```bash
-# Clone the repository
-git clone <repo_url>
-cd devops-simulator
-
-# Install dependencies
-npm install
-
-# Configure environment variables
-
-# Run development server
-npm run dev
-
-# Access dashboard at http://localhost:3000
-##FAQ
+### Production mode 
+export DEPLOY_ENV=production
+./scripts/deploy.sh
+## FAQ
 update

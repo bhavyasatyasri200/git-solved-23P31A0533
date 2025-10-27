@@ -2,6 +2,7 @@
 # DevOps Simulator Deployment Script
 # Supports Development and Experimental AI/Multi-Cloud
 # Version: Unified v3.0.0-beta
+echo "DEPLOY_ENV=$DEPLOY_ENV"
 
 set -euo pipefail
 

@@ -21,3 +21,13 @@
 - 0312c6f: updating main (Hanu Gupta, 3 days ago)
 - fadfd24: Revise README for DevOps Simulator project (Hanu Gupta, 3 days ago)
 - ae630eb: Initial commit (Hanu Gupta, 3 days ago)
+Also performed actions:
+used fetch 1time
+     pull 1 time
+     stash 1 time
+     cherry-pick 1 time
+     rebase 1 time
+     reset 3 times
+     revert 1 time
+created 3tags
+
