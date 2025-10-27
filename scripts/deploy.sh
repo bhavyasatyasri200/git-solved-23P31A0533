@@ -1,28 +1,48 @@
 #!/bin/bash
-# DevOps Simulator Deployment Script
-# Supports Development and Experimental AI/Multi-Cloud
-# Version: Unified v3.0.1-beta
+# Unified Deployment Script
+# Supports Production, Development, and Experimental AI modes
 
 set -euo pipefail
 
-# Determine deployment environment
-# Priority: argument > exported variable > default to development
-DEPLOY_ENV="${1:-${DEPLOY_ENV:-development}}"
-echo "DEPLOY_ENV=$DEPLOY_ENV"
-echo "Deployment Environment: $DEPLOY_ENV"
+echo "====================================="
+echo "DevOps Simulator - Deployment Script"
+echo "====================================="
 
-# -------------------------
-# DEVELOPMENT DEPLOYMENT
-# -------------------------
-if [ "$DEPLOY_ENV" = "development" ]; then
-    echo "====================================="
-    echo "DevOps Simulator - Development Deploy"
-    echo "====================================="
+# Choose environment: "production", "development", or "experimental"
+DEPLOY_ENV="${DEPLOY_ENV:-production}"
 
+if [ "$DEPLOY_ENV" == "production" ]; then
+    DEPLOY_REGION="us-east-1"
+    APP_PORT=8080
+
+    echo "Environment: $DEPLOY_ENV"
+    echo "Region: $DEPLOY_REGION"
+    echo "Port: $APP_PORT"
+
+    # Pre-deployment checks
+    echo "Running pre-deployment checks..."
+    if [ ! -f "config/app-config.yaml" ]; then
+        echo "Error: Configuration file not found!"
+        exit 1
+    fi
+
+    # Deploy application
+    echo "Starting production deployment..."
+    echo "Pulling latest Docker images..."
+    # docker pull devops-simulator:latest
+
+    echo "Rolling update strategy initiated..."
+    # kubectl rolling-update devops-simulator
+
+    echo "Deployment completed successfully!"
+    echo "Application available at: https://app.example.com"
+
+elif [ "$DEPLOY_ENV" == "development" ]; then
     DEPLOY_MODE="docker-compose"
     APP_PORT=3000
     ENABLE_DEBUG=true
 
+    echo "Environment: $DEPLOY_ENV"
     echo "Mode: $DEPLOY_MODE"
     echo "Port: $APP_PORT"
     echo "Debug: $ENABLE_DEBUG"
@@ -38,14 +58,17 @@ if [ "$DEPLOY_ENV" = "development" ]; then
     echo "Installing dependencies..."
     npm install
 
-    # Run tests (don’t fail if no tests found)
+    # Run tests
     echo "Running tests..."
-    npx jest --passWithNoTests || echo "⚠️  Jest tests skipped/found none"
+    npm test
 
     # Deploy application
-    echo "Starting Docker Compose deployment..."
+    echo "Starting development deployment..."
+    echo "Using Docker Compose..."
     docker-compose up -d
-    echo "Waiting for application to start..."
+
+    # Wait for application to start
+    echo "Waiting for application to be ready..."
     sleep 5
 
     # Health check
@@ -54,21 +77,15 @@ if [ "$DEPLOY_ENV" = "development" ]; then
 
     echo "Deployment completed successfully!"
     echo "Application available at: http://localhost:$APP_PORT"
-    echo "Hot reload enabled"
+    echo "Hot reload enabled - code changes will auto-refresh"
 
-# -------------------------
-# EXPERIMENTAL DEPLOYMENT
-# -------------------------
-elif [ "$DEPLOY_ENV" = "experimental" ]; then
-    echo "================================================"
-    echo "DevOps Simulator - EXPERIMENTAL AI-POWERED DEPLOY"
-    echo "================================================"
-
+elif [ "$DEPLOY_ENV" == "experimental" ]; then
     DEPLOY_STRATEGY="canary"
     DEPLOY_CLOUDS=("aws" "azure" "gcp")
     AI_OPTIMIZATION=true
     CHAOS_TESTING=false
 
+    echo "Environment: $DEPLOY_ENV"
     echo "Strategy: $DEPLOY_STRATEGY"
     echo "Target Clouds: ${DEPLOY_CLOUDS[@]}"
     echo "AI Optimization: $AI_OPTIMIZATION"
@@ -81,6 +98,7 @@ elif [ "$DEPLOY_ENV" = "experimental" ]; then
     fi
 
     # Pre-deployment checks
+    echo "Running advanced pre-deployment checks..."
     if [ ! -f "config/app-config.yaml" ]; then
         echo "Error: Configuration file not found!"
         exit 1
@@ -100,10 +118,12 @@ elif [ "$DEPLOY_ENV" = "experimental" ]; then
         echo "✓ $cloud deployment initiated"
     done
 
-    # Canary deployment simulation
+    # Canary deployment
     echo "Initiating canary deployment strategy..."
-    echo "- 10% traffic to new version"; sleep 2
-    echo "- 50% traffic to new version"; sleep 2
+    echo "- 10% traffic to new version"
+    sleep 2
+    echo "- 50% traffic to new version"
+    sleep 2
     echo "- 100% traffic to new version"
 
     # AI monitoring
@@ -126,10 +146,7 @@ elif [ "$DEPLOY_ENV" = "experimental" ]; then
     echo "Multi-Cloud Status: https://clouds.example.com"
     echo "================================================"
 
-# -------------------------
-# UNKNOWN ENVIRONMENT
-# -------------------------
 else
-    echo "Error: Unknown deployment environment '$DEPLOY_ENV'"
+    echo "Error: Unknown DEPLOY_ENV '$DEPLOY_ENV'. Supported values: production, development, experimental."
     exit 1
 fi
